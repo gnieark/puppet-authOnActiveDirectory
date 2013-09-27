@@ -9,7 +9,8 @@ C'est une version CHARLIE (pire que beta) Je n'ai pas encore fait tous les tests
 Envoyez le contenu du git dans le dossier PuppetDirectory/modules/authonad
 
 /etc/puppet/manifests/modules.pp
-    import ["authonad"]
+   import["authonad"]
+ 
 
 
 
