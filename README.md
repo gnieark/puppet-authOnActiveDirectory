@@ -4,6 +4,9 @@ puppet-authOnActiveDirectory
 Ce module puppet permet de configurer les ordinateurs afin que l'identification des utilisateurs 
 se fasse en utilisant les comptes Active Directory d'un contrôleur de domaine.
 
+* Configure krb et samba pour intégrer l'ordinateur au domaine active directory
+* Configure pam pour que l'authentification se fasse sur les comptes windows
+
 C'est une version CHARLIE (pire que beta) Je n'ai pas encore fait tous les tests.
 
 Envoyez le contenu du git dans le dossier PuppetDirectory/modules/authonad
@@ -29,8 +32,13 @@ Exemple d'utilisation dans le fichier /etc/puppet/manifests/site.pp
 
 Les contributeurs sont les bienvenus!
 
+## To do:
+* tests et corrections
+* le code est pour des clients debian, l'adapter pour les autres
+
+
 ==============================
-I am a cow when i need to translate in english. Contrubutors can traduce the previous text. thanks
+I'll translate it in english later but contrubutors can traduce the previous text. thanks
 
 ## Contributing
 
