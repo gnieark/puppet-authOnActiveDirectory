@@ -1,0 +1,50 @@
+[global]
+  workgroup = <%= scope.lookupvar('authonad::nomnetbios') -%>
+  
+  server string = <%= scope.lookupvar('authonad::srvad ') -%>
+  
+  log file = /var/log/samba/log.%m
+  max log size = 1000
+  panic action = /usr/share/samba/panic-action %d
+  encrypt passwords = true
+  passdb backend = tdbsam
+  obey pam restrictions = yes
+  unix password sync = yes
+  passwd program = /usr/bin/passwd %u
+  passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+  pam password change = yes
+  map to guest = bad user
+  winbind enum groups = yes
+  winbind gid = 10000-20000
+  map readonly = no
+  ea support = yes
+  interfaces = eth0 lo
+  dos filemode = yes
+  winbind use default domain = yes
+  realm = <%= scope.lookupvar('authonad::nomnetbios') -%>
+  
+  map archive = no
+  security = ads
+  acl check permissions = false
+  bind interfaces only = yes
+  map acl inherit = yes
+  map system = no
+  store dos attributes = yes
+  winbind enum users = yes
+  inherit acls = yes
+  winbind uid = 10000-20000
+  acl group control = yes
+[homes]
+   comment = Home Directories
+   browseable = no
+   read only = no
+   create mask = 0700
+   directory mask = 0700
+   valid users = %S
+[intranet]
+   writable = yes
+   comment = intranet
+   browsable = yes
+   create mask = 0770
+   path = intranet
+   directory mask = 0770

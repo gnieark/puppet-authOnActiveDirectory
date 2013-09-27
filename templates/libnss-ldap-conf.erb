@@ -1,0 +1,18 @@
+base dc=company,dc=com
+uri ldap://srv-general.domboispetit
+referrals no
+ldap_version 3
+pam_password md5
+pam_password md5
+nss_base_passwd ou=Users,dc=company,dc=com?sub?objectClass=user
+nss_base_group          dc=company,dc=com?sub?&(gidNumber=*)
+nss_map_attribute uid msSFU30Name
+nss_map_objectclass posixAccount user
+nss_map_objectclass shadowAccount user
+nss_map_attribute homeDirectory unixHomeDirectory
+nss_map_attribute shadowLastChange pwdLastSet
+nss_map_objectclass posixGroup group
+nss_map_attribute uniqueMember member
+pam_login_attribute sAMAccountName
+pam_filter objectclass=User
+nss_initgroups_ignoreusers avahi,avahi-autoipd,backup,bin,couchdb,daemon,games,gdm,gnats,haldaemon,hplip,irc,kernoops,libuuid,list,lp,mail,man,messagebus,mysql,news,proxy,pulse,root,saned,speech-dispatcher,sshd,statd,sync,sys,syslog,uucp,www-data
