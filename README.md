@@ -35,6 +35,7 @@ Les contributeurs sont les bienvenus!
 ## To do:
 * tests et corrections
 * le code est pour des clients debian, l'adapter pour les autres
+* Gestion des erreurs lors de l'integration au domaine du "net ads join"
 
 
 ==============================
