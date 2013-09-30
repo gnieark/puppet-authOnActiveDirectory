@@ -16,6 +16,7 @@
         
 [domain_realm]
         .<%= scope.lookupvar('authonad::suffixedns') -%> = <%= scope.lookupvar('authonad::nomnetbios') -%>
+        
 [login]
         krb4_convert = true
         krb4_get_tickets = false
