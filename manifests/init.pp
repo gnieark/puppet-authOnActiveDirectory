@@ -40,7 +40,7 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$suffixedns, $srvad){
                 owner   => root,
                 group   => root,
                 mode    => 644,
-                content => template("authonad/libnss-ldap-conf.erb")
+                content => template("authonad/nsswitch-conf.erb")
         }
 
         file
