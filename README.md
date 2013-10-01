@@ -12,12 +12,12 @@ avec le mode de comptabiltié NT4 activé (regardez du coté des GPO pour faire 
 les tests étaient des Debian 7
 
 ===
-This puppet module configure computers in order users auth is based on a Microsoft active Directory
+This puppet module configures computers as it: User auth is based on a Microsoft active Directory
 * Install and configure krb5 for joining Microsoft Domain controler
 * Configure pam for auth by winbind
 
-That's a "charlie version (worst than beta). It was tested on an active directory Windows server 2012, 
-configured with NT4 compatibility.  client computer for the test wes a Debian 7.
+That's a "charlie" version (worst than beta). It was tested on an active directory Windows server 2012, 
+configured with NT4 compatibility.  client computer for the test was a Debian 7.
 
 ===
 
