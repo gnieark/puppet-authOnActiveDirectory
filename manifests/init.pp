@@ -76,31 +76,37 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$suffixedns, $srvad){
                 mode    => 644,
                 content => template("authonad/common-passwd.erb")
         }
+	file { '/home':
+    		ensure  => directory,
+    		owner   => 'root',
+    		group   => 'root',
+    		mode    => '0755',
+  	}
         $homedirectory = "/home/${nomnetbios}"
         file {$homedirectory :
 	  ensure => "directory",
 	  owner   => root,
           group   => root,
-	  mode    => 770
+	  mode    => 0755
 	}
 	$lacommande= "net join ads -U ${winbindacct}%${winbindpass} -S ${srvad}.${suffixedns}"
 	
 	exec{"cmd1":
 	  command	=> $lacommande,  
-	  require	=> [ File["/etc/samba/smb.conf"], File["/etc/krb5.conf"], File["/etc/nsswitch.conf"], File["/etc/pam.d/common-auth"],
-	    File["/etc/pam.d/common-session"], File["/etc/pam.d/common-account"],  File["/etc/pam.d/common-passwd"]
-	  ],
+	  #require	=> [ File["/etc/samba/smb.conf"], File["/etc/krb5.conf"], File["/etc/nsswitch.conf"], File["/etc/pam.d/common-auth"],
+	  #  File["/etc/pam.d/common-session"], File["/etc/pam.d/common-account"],  File["/etc/pam.d/common-passwd"]
+	  #],
 	  path    => ["/usr/bin", "/usr/sbin"]
 	}
 	exec{"cmd2":
 	      command => "wbinfo -u",
 	      path    => ["/usr/bin", "/usr/sbin"],
-	      require	=> Exec["cmd1"]
+	    #  require	=> Exec["cmd1"]
 	 }
 	exec{"cmd3":
 	      command => "wbinfo -g",
 	      path    => ["/usr/bin", "/usr/sbin"],
-	      require	=> Exec["cmd2"],
+	    #  require	=> Exec["cmd2"],
 	      notify  => service["samba","winbind"]
 	 }
 }
