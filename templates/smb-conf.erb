@@ -1,7 +1,7 @@
 [global]
   workgroup = <%= scope.lookupvar('authonad::nomnetbios') -%>
   
-  server string = <%= scope.lookupvar('authonad::srvad ') -%>
+  server string = <%= scope.lookupvar('authonad::srvad') -%>
   
   log file = /var/log/samba/log.%m
   max log size = 1000
