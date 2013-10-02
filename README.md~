@@ -23,8 +23,7 @@ Exemple d'utilisation dans le fichier /etc/puppet/manifests/site.pp
         class { 'authonad':
           winbindacct    => 'administrateur',
           winbindpass    => 'OurBigPassword',
-          nomnetbios       => 'DOM.BOISPETIT',
-          workgroup     => 'DOMBOISPETIT',  
+          nomnetbios       => 'DOMBOISPETIT',
           suffixedns      => 'dom.boispetit',
           srvad          => 'srv-general'
         }

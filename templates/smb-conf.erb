@@ -1,5 +1,5 @@
 [global]
-  workgroup = <%= scope.lookupvar('authonad::nomnetbios') -%>
+  workgroup = <%= scope.lookupvar('authonad::workgroup') -%>
   
   server string = <%= scope.lookupvar('authonad::srvad') -%>
   
@@ -34,6 +34,7 @@
   inherit acls = yes
   winbind uid = 10000-20000
   acl group control = yes
+  template shell = /bin/bash
 [homes]
    comment = Home Directories
    browseable = no
