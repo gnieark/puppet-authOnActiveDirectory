@@ -1,4 +1,4 @@
-class authonad($winbindacct, $winbindpass, $nomnetbios,$suffixedns, $srvad){
+class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $srvad){
 	package{
 	  'krb5-user': ensure => installed;
 	  'winbind':   ensure => installed;
@@ -93,20 +93,21 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$suffixedns, $srvad){
 	
 	exec{"cmd1":
 	  command	=> $lacommande,  
-	  #require	=> [ File["/etc/samba/smb.conf"], File["/etc/krb5.conf"], File["/etc/nsswitch.conf"], File["/etc/pam.d/common-auth"],
-	  #  File["/etc/pam.d/common-session"], File["/etc/pam.d/common-account"],  File["/etc/pam.d/common-passwd"]
-	  #],
+	  require	=> [ File["/etc/samba/smb.conf"], File["/etc/krb5.conf"], File["/etc/nsswitch.conf"], File["/etc/pam.d/common-auth"],
+	    File["/etc/pam.d/common-session"], File["/etc/pam.d/common-account"],  File["/etc/pam.d/common-passwd"], Package["winbind"], Package["samba"]
+	  ],
 	  path    => ["/usr/bin", "/usr/sbin"]
 	}
 	exec{"cmd2":
 	      command => "wbinfo -u",
 	      path    => ["/usr/bin", "/usr/sbin"],
+              require	=> [Package["winbind"], Package["samba"]]
 	    #  require	=> Exec["cmd1"]
 	 }
 	exec{"cmd3":
 	      command => "wbinfo -g",
 	      path    => ["/usr/bin", "/usr/sbin"],
-	    #  require	=> Exec["cmd2"],
+	     require   => [Package["winbind"], Package["samba"]],
 	      notify  => service["samba","winbind"]
 	 }
 }

@@ -1,5 +1,6 @@
 [libdefaults]
         default_realm = <%= scope.lookupvar('authonad::nomnetbios') -%>
+
         default_tkt_enctypes = des3-hmac-sha1 des-cbc-crc des-cbc-md5 aes256-cts arcfour-hmac-md5
         default_tgs_enctypes = des3-hmac-sha1 des-cbc-crc des-cbc-md5 aes256-cts arcfour-hmac-md5
 
