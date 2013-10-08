@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
+<!--
+        See pam_mount.conf(5) for a description.
+-->
+
+<pam_mount>
+
+<debug enable="0" />
+
+<mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow_root,allow_other" />
+
+<mntoptions require="nosuid,nodev" />
+
+<logout wait="0" hup="0" term="0" kill="0" />
+
+<mkmountpoint enable="1" remove="true" />
+
+<% @shares.each do |share| -%>
+  <volume fstype="cifs" server="<%= share['host'] %>" path="<%= share['path'] %>" mountpoint="<%= share['mountpoint'] %>" user="*" options="rw,auto,iocharset=utf8"/>"
+<% end -%>
+
+</pam_mount>
+
