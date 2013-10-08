@@ -11,6 +11,8 @@ C'est une version CHARLIE (pire que beta). Testé sur uin controleur de domaine 
 avec le mode de comptabiltié NT4 activé (regardez du coté des GPO pour faire ça). Les clients utilisés pour
 les tests étaient des Debian 7
 
+L'automontage des partages fonctionne pour debian XFCE, il y a quelques fichiers à adapter pour gnome et kde (plus tard)
+
 ===
 This puppet module configures computers as it: User auth is based on a Microsoft active Directory
 * Install and configure krb5 for joining Microsoft Domain controler
@@ -18,6 +20,8 @@ This puppet module configures computers as it: User auth is based on a Microsoft
 
 That's a "charlie" version (worst than beta). It was tested on an active directory Windows server 2012, 
 configured with NT4 compatibility.  client computer for the test was a Debian 7.
+
+Automount shares only works on debian XFCE. need to verify some points for gnome and KDE 
 
 ===
 
@@ -38,7 +42,11 @@ Exemple d'utilisation dans le fichier /etc/puppet/manifests/site.pp
           nomnetbios       => 'DOM.BOISPETIT',
           workgroup     => 'DOMBOISPETIT',  
           suffixedns      => 'dom.boispetit',
-          srvad          => 'srv-general'
+          srvad          => 'srv-general',
+	  shares => [{host => 'srv-general.dom.boispetit', path => 'intranet', mountpoint => '/media/intranet' },
+		     {host => 'srv-general.dom.boispetit', path => 'dosperso/%(USER)', mountpoint => '/media/dossierPersonnel'}
+		     ]
+	}
         }
         include authonad
     }
@@ -46,6 +54,7 @@ Exemple d'utilisation dans le fichier /etc/puppet/manifests/site.pp
 Les contributeurs sont les bienvenus!
 
 ## To do:
+* automount pour gnome et kde
 * tests et corrections
 * le code est pour des clients debian, l'adapter pour les autres
 * Gestion des erreurs lors de l'integration au domaine du "net ads join"

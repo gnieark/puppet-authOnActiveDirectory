@@ -1,9 +1,11 @@
-class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $srvad){
+class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $srvad,$shares){
 	package{
 	  'krb5-user': ensure => installed;
 	  'winbind':   ensure => installed;
 	  'expect':    ensure => installed;
 	  'samba':     ensure => installed;
+	  'libpam-mount': ensure =>installed;
+	  'cifs-utils':	ensure => installed;
 	}
 	service { "samba":
 		    ensure  => "running",
@@ -76,11 +78,39 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $
                 mode    => 644,
                 content => template("authonad/common-passwd.erb")
         }
+	
+	file
+	{"/etc/pam.d/lightdm":
+		path => "/etc/pam.d/lightdm",
+		owner => root,
+		group => root,
+		mode => 644,
+		content => template("authonad/lightdm.erb")
+	}
+
+        file
+        {"/etc/pam.d/lightdm-autologin":
+                path => "/etc/pam.d/lightdm-autologin",
+                owner => root,
+                group => root,
+                mode => 644,
+                content => template("authonad/lightdm-autologin.erb")
+        }
+     
+        file
+        {"/etc/security/pam_mount.conf.xml":
+                path => "/etc/security/pam_mount.conf.xml",
+                owner => root,
+                group => root,
+                mode => 644,
+                content => template("authonad/pam-mount-conf-xml.erb")
+        }
+
 	file { '/home':
     		ensure  => directory,
     		owner   => 'root',
     		group   => 'root',
-    		mode    => '0755',
+    		mode    => '0755'
   	}
         $homedirectory = "/home/${nomnetbios}"
         file {$homedirectory :
