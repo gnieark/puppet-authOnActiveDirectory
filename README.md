@@ -1,5 +1,7 @@
 puppet-authOnActiveDirectory
 ============================
+/!\ Actual Version is buggy, i am working on
+============================
 
 Ce module puppet permet de configurer les ordinateurs afin que l'identification des utilisateurs 
 se fasse en utilisant les comptes Active Directory d'un contrôleur de domaine.
