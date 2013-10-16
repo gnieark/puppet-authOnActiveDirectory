@@ -78,7 +78,14 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $
                 mode    => 644,
                 content => template("authonad/common-passwd.erb")
         }
-	
+	 file
+        { "/etc/pam.d/common-pammount":
+                path    => "/etc/pam.d/common-pammount",
+                owner   => root,
+                group   => root,
+                mode    => 644,
+                content => template("authonad/common-pammount.erb")
+        }
 	file
 	{"/etc/pam.d/lightdm":
 		path => "/etc/pam.d/lightdm",
@@ -106,6 +113,7 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $
                 content => template("authonad/pam-mount-conf-xml.erb")
         }
 
+	
 	file { '/home':
     		ensure  => directory,
     		owner   => 'root',
@@ -121,6 +129,7 @@ class authonad($winbindacct, $winbindpass, $nomnetbios,$workgroup,$suffixedns, $
 	}
 	$lacommande= "net join ads -U ${winbindacct}%${winbindpass} -S ${srvad}.${suffixedns}"
 	
+		
 	exec{"cmd1":
 	  command	=> $lacommande,  
 	  require	=> [ File["/etc/samba/smb.conf"], File["/etc/krb5.conf"], File["/etc/nsswitch.conf"], File["/etc/pam.d/common-auth"],

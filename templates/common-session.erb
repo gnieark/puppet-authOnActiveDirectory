@@ -1,2 +1,3 @@
 session      required   pam_unix.so
 session      required   pam_mkhomedir.so  umask=0022  skel=/etc/skel
+session      optional   pam_mount.so
