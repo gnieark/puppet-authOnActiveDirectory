@@ -17,7 +17,7 @@
 <mkmountpoint enable="1" remove="true" />
 
 <% @shares.each do |share| -%>
-  <volume fstype="cifs" server="<%= share['host'] %>" path="<%= share['path'] %>" mountpoint="<%= share['mountpoint'] %>" user="*" options="rw,auto,iocharset=utf8"/>"
+  <volume fstype="cifs" server="<%= share['host'] %>" path="<%= share['path'] %>" mountpoint="<%= share['mountpoint'] %>" user="*" options="rw,auto,iocharset=utf8"/>
 <% end -%>
 
 </pam_mount>

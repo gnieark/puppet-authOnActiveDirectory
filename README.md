@@ -1,7 +1,7 @@
 puppet-authOnActiveDirectory
 ============================
-/!\ Actual Version is buggy, i am working on
-============================
+
+
 
 Ce module puppet permet de configurer les ordinateurs afin que l'identification des utilisateurs 
 se fasse en utilisant les comptes Active Directory d'un contrôleur de domaine.
@@ -13,7 +13,8 @@ C'est une version CHARLIE (pire que beta). Testé sur uin controleur de domaine 
 avec le mode de comptabiltié NT4 activé (regardez du coté des GPO pour faire ça). Les clients utilisés pour
 les tests étaient des Debian 7
 
-L'automontage des partages fonctionne pour debian XFCE, il y a quelques fichiers à adapter pour gnome et kde (plus tard)
+L'automontage des partages ne fonctionne pas pour le moment (j'y travaille)... ce sera pour debian XFCE, 
+il y aura quelques fichiers à adapter pour gnome et kde (plus tard)
 
 ===
 This puppet module configures computers as it: User auth is based on a Microsoft active Directory
